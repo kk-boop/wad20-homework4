@@ -26,6 +26,19 @@ router.post('/', authorize,  (request, response) => {
 
     // Endpoint to create a new post
 
+    const params = {
+        userId: request.currentUser.id,
+        ...request.body
+    };
+
+    PostModel.create(params, (post) => {
+        if (!post) {
+            response.status(400);
+            return;
+        }
+
+        response.json(post);
+    });
 });
 
 
