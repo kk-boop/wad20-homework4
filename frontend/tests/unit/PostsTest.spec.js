@@ -103,4 +103,8 @@ describe('Posts', () => {
     it('1 == 1', function () {
         expect(true).toBe(true)
     });
+
+    it('create time format correct', () => {
+       expect(wrapper.find('.post-author > small').text()).toBe("Saturday, December 5, 2020 1:53 PM")
+    });
 });
