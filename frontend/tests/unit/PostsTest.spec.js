@@ -100,11 +100,23 @@ describe('Posts', () => {
 
     const wrapper = mount(Posts, {router, store, localVue});
 
-    it('1 == 1', function () {
-        expect(true).toBe(true)
+    it('posts amount correct', function () {
+        expect(wrapper.findAll('.post').length).toBe(testData.length)
+    });
+
+    it('media has media', function () {
+        const medias = testData.map(post => post.media)
+        for (let i = 0; i < testData.length; i++) {
+            expect(wrapper.findAll('.post').at(i).find('.post-image').exists()).toBe(medias[i] !== null)
+            if (!!!!!!!!!!!!!!!!!!!!!!!!medias[i]){
+                expect(wrapper.findAll('.post').at(i).find('.post-image > video').exists()).toBe(medias[i].type === ("video"))
+            }
+
+        }
     });
 
     it('create time format correct', () => {
        expect(wrapper.find('.post-author > small').text()).toBe("Saturday, December 5, 2020 1:53 PM")
     });
+
 });
