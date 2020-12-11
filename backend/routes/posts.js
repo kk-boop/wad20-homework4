@@ -45,12 +45,21 @@ router.post('/', authorize,  (request, response) => {
 router.put('/:postId/likes', authorize, (request, response) => {
 
     // Endpoint for current user to like a post
+    PostModel.getLikesByUserIdAndPostId(request.currentUser.id,request.params.postId, callback => {
+        if (callback.length === 0) {
+            PostModel.like(request.currentUser.id, request.params.postId, (callback) => {
+                response.status(200)
+            });
+        }
+    })
 });
 
 router.delete('/:postId/likes', authorize, (request, response) => {
 
     // Endpoint for current user to unlike a post
-
+    PostModel.unlike(request.currentUser.id, request.params.postId, callback => {
+        response.status(200)
+    });
 });
 
 module.exports = router;
